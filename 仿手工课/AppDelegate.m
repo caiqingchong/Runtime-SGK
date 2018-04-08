@@ -7,20 +7,39 @@
 //
 
 #import "AppDelegate.h"
-
+#import "GPGuideTool.h"
+#import "ViewController.h"
+#import "ZLCGuidePageView.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
-
+//判断第一次启动，然后加载导航视图
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [GPGuideTool chooseRootViewController];
+    [self configApper];
+    [self.window makeKeyWindow];
     return YES;
 }
 
-
+//设置导航栏中间标题的颜色
+- (void)configApper
+{
+    // 导航栏中间标题颜色
+    UINavigationBar *appearance = [UINavigationBar appearance];
+    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+    textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    textAttrs[NSFontAttributeName] = [UIFont boldSystemFontOfSize:18];
+    [appearance setTitleTextAttributes:textAttrs];
+    
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
